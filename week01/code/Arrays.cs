@@ -13,8 +13,26 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // 1 - Create List with length
+        // 2 - Create a loop to iterate number by number
+        // 3 - Add a condition that multiply the "number" by each number
+        // 4 - Add results that condition into the list
+
+        var results = new double[length];
+        int listIndex = 0;
+
+        for (int i = 1; i <= length; i++)
+        {
+            double multiple = number * i;
+
+            results[listIndex] = multiple;
+
+            listIndex++;
+        }
+
+        return results; // replace this return statement with your own
     }
+    
 
     /// <summary>
     /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
