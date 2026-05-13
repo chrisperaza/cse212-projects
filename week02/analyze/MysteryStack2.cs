@@ -3,7 +3,7 @@
         return float.TryParse(text, out _);
     }
 
-    public static float Run(string text) {
+    public static float Run(string text) { // if text is = 5 3 7 + * // 6 2 + 5 3 - /
         var stack = new Stack<float>();
         foreach (var item in text.Split(' ')) {
             if (item == "+" || item == "-" || item == "*" || item == "/") {
@@ -44,6 +44,6 @@
         if (stack.Count != 1)
             throw new ApplicationException("Invalid Case 4!");
 
-        return stack.Pop();
+        return stack.Pop(); // return is = 50 // 4 /
     }
 }
