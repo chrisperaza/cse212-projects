@@ -22,7 +22,35 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        List<string> list = new List<string>(); // create an empty list
+		HashSet<string> wordsInSet = new HashSet<string>(words); // transform words Array to a Set
+
+        foreach (var word in words) // iterate each word in words Array
+        {
+            // separate each letter of each word
+            Stack<char> stack = new Stack<char>();
+            foreach (var letter in word)
+                stack.Push(letter);
+            // create the word, but backwards
+            string backWord = "";
+            while (stack.Count > 0)
+                backWord += stack.Pop();
+			// if the backword is in the Set, add word and backword to the list
+			if (wordsInSet.Contains(backWord)) {
+                if(backWord != word) {
+				    list.Add(backWord + " & " + word);
+				    wordsInSet.Remove(word); // remove the first word so the condition not meet it again
+                }
+			} 
+        }
+		
+        // turn list into an array
+		string[] result = new string[list.Count];
+		for (int i = 0; i < list.Count; i++) {
+			result[i] = list[i];
+		}
+
+        return result;
     }
 
     /// <summary>
