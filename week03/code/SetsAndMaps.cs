@@ -102,7 +102,36 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+		bool result = false;
+		
+		string word1Clean = word1.Replace(" ", "");
+		string word1final = word1Clean.ToLower();
+		string word2Clean = word2.Replace(" ", "");
+		string word2final = word2Clean.ToLower();
+		
+		Dictionary<int,char> dict = new Dictionary<int,char>();
+		int counter = 0;
+		
+		foreach (var letter in word1final)
+			dict.Add(counter++,letter);
+		
+		if (word1final.Length == word2final.Length) {
+			int counter2 = 0;
+			foreach (var letter in word2final) {
+				if (dict.ContainsValue(letter)) {
+					int key = dict.FirstOrDefault(x => x.Value == letter).Key;
+					dict.Remove(key);
+					counter2++;
+				}
+			}
+			if (counter2 == word2final.Length) {
+				result = true;
+			}
+		} else {
+			result = false;
+		}
+		
+        return result;
     }
 
     /// <summary>
@@ -136,6 +165,21 @@ public static class SetsAndMaps
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
-        return [];
+
+        List<string> listOfResults = new List<string>();
+
+        foreach (var feature in featureCollection.Features)
+        {
+                decimal mag = feature.Properties.Mag;
+                string place = feature.Properties.Place;
+
+                string textWithFormat = $"{place} - Mag {mag}";
+
+                listOfResults.Add(textWithFormat);
+        }
+
+        string[] result = listOfResults.ToArray();
+        
+        return result;
     }
 }
