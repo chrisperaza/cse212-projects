@@ -10,7 +10,7 @@
 public class TakingTurnsQueue
 {
     private readonly PersonQueue _people = new();
-
+    
     public int Length => _people.Length;
 
     /// <summary>
@@ -39,12 +39,15 @@ public class TakingTurnsQueue
         }
         else
         {
-            Person person = _people.Dequeue();
+            Person person = _people.Dequeue();   
             if (person.Turns > 1)
             {
                 person.Turns -= 1;
                 _people.Enqueue(person);
             }
+            if (person.Turns <= 0) {
+                _people.Enqueue(person);
+			}
 
             return person;
         }
