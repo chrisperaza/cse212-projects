@@ -152,16 +152,11 @@ public static class SetsAndMaps
 
         foreach (var feature in featureCollection.Features)
         {
-                decimal mag = feature.Properties.Mag;
-                string place = feature.Properties.Place;
-
-                string textWithFormat = $"{place} - Mag {mag}";
+                string textWithFormat = $"{feature.Properties.Place} - Mag {feature.Properties.Mag}";
 
                 listOfResults.Add(textWithFormat);
         }
-
-        string[] result = listOfResults.ToArray();
         
-        return result;
+        return [.. listOfResults];
     }
 }
