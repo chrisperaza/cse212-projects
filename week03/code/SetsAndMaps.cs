@@ -22,35 +22,24 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        List<string> list = new List<string>(); // create an empty list
-		HashSet<string> wordsInSet = new HashSet<string>(words); // transform words Array to a Set
+        List<string> list = []; // create an empty list
+		HashSet<string> wordsInSet = [.. words]; // transform words Array to a Set
 
         foreach (var word in words) // iterate each word in words Array
         {
-            // separate each letter of each word
-            Stack<char> stack = new Stack<char>();
-            foreach (var letter in word)
-                stack.Push(letter);
-            // create the word, but backwards
-            string backWord = "";
-            while (stack.Count > 0)
-                backWord += stack.Pop();
-			// if the backword is in the Set, add word and backword to the list
-			if (wordsInSet.Contains(backWord)) {
-                if(backWord != word) {
-				    list.Add(backWord + " & " + word);
-				    wordsInSet.Remove(word); // remove the first word so the condition not meet it again
-                }
+            // reverse word
+            char[] charArray = word.ToCharArray();
+            Array.Reverse(charArray);
+            string backWord = new string(charArray);
+
+			// if the backword is in the Set and isn't the same as word, add word and backword to the list
+			if (wordsInSet.Contains(backWord) && backWord != word) {
+				list.Add(backWord + " & " + word);
+				wordsInSet.Remove(word); // remove the first word so the condition not meet it again
 			} 
         }
 		
-        // turn list into an array
-		string[] result = new string[list.Count];
-		for (int i = 0; i < list.Count; i++) {
-			result[i] = list[i];
-		}
-
-        return result;
+        return [.. list];
     }
 
     /// <summary>
@@ -102,36 +91,29 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-		bool result = false;
+		string word1final = word1.Replace(" ", "").ToLower();
+		string word2final = word2.Replace(" ", "").ToLower();
+
+        if (word1final.Length != word2final.Length) return false;
 		
-		string word1Clean = word1.Replace(" ", "");
-		string word1final = word1Clean.ToLower();
-		string word2Clean = word2.Replace(" ", "");
-		string word2final = word2Clean.ToLower();
-		
-		Dictionary<int,char> dict = new Dictionary<int,char>();
-		int counter = 0;
-		
-		foreach (var letter in word1final)
-			dict.Add(counter++,letter);
-		
-		if (word1final.Length == word2final.Length) {
-			int counter2 = 0;
-			foreach (var letter in word2final) {
-				if (dict.ContainsValue(letter)) {
-					int key = dict.FirstOrDefault(x => x.Value == letter).Key;
-					dict.Remove(key);
-					counter2++;
-				}
-			}
-			if (counter2 == word2final.Length) {
-				result = true;
-			}
-		} else {
-			result = false;
-		}
-		
-        return result;
+        // create a dictionary and loop to count how many times a letter repeat in the first word 
+		Dictionary<char,int> countLetter = [];
+
+        foreach (char letter in word1final)
+            if (countLetter.ContainsKey(letter))
+            	countLetter[letter]++;
+        	else
+            	countLetter[letter] = 1;
+
+        // know if letters in word 2 has the same counts as the word 1
+        foreach (char letter in word2final)
+        {
+            if (!countLetter.ContainsKey(letter) || countLetter[letter] == 0)
+            	return false;
+            countLetter[letter]--;
+        }
+            
+        return true;
     }
 
     /// <summary>
