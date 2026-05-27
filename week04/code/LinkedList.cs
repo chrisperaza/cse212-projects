@@ -136,17 +136,14 @@ public class LinkedList : IEnumerable<int>
     public void Remove(int value)
     {
         // TODO Problem 3
-        Node? current = _head;
 
+        // start with the head
+        Node? current = _head;
+        // loop until the end (null)
         while (current is not null)
         {
-            //Console.WriteLine(current.Data);
             if (current.Data == value)
             {
-                //current.Next!.Prev = current.Prev;
-                //current.Prev!.Next = current.Next; 
-                //Console.WriteLine(current.Data);
-
                 if (current == _head)
                 {
                     RemoveHead();
@@ -155,16 +152,17 @@ public class LinkedList : IEnumerable<int>
                 {
                     RemoveTail();
                 }
+                // remove current if it's in the middle
                 else
                 {
                     current.Next!.Prev = current.Prev;
                     current.Prev!.Next = current.Next; 
                 }
 
-                return;
+                return; // exit the function after remove the value
             }
 
-            current = current.Next; 
+            current = current.Next; // go to the next node to search the value
         }
     }
 
@@ -174,6 +172,21 @@ public class LinkedList : IEnumerable<int>
     public void Replace(int oldValue, int newValue)
     {
         // TODO Problem 4
+
+        // start with the head
+        Node? current = _head;
+        // loop until the end (null)
+        while (current is not null)
+        {
+            // when match the old value
+            if (current.Data == oldValue)
+            {
+                InsertAfter(current.Data,newValue); // insert the new value after the old 
+                Remove(current.Data); // remove the old value
+            }
+
+            current = current.Next; // go to the next node to search the value
+        }
     }
 
     /// <summary>
