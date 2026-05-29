@@ -1,0 +1,52 @@
+// 1 - An intersection of two sets contains items that are in both of the two sets.
+
+using System;
+using System.Linq;
+using System.Collections.Generic;
+					
+public class Program
+{
+	public static void Main()
+	{
+		HashSet<int> set1 = new HashSet<int>(){1,2,3,4,5};
+		HashSet<int> set2 = new HashSet<int>(){4,5,6,7,8};
+		Console.WriteLine(string.Join(", ",Intersection(set1,set2))); // 4, 5
+	}
+	
+	public static HashSet<int> Intersection(HashSet<int> set1, HashSet<int> set2) {
+		HashSet<int> result = new HashSet<int>();
+		foreach (int number in set1) {
+			if (set2.Contains(number)) {
+				result.Add(number);
+			}
+		}
+		return result;
+	}
+}
+
+// 2 - A union of two sets contains all items that are in either set.
+
+using System;
+using System.Linq;
+using System.Collections.Generic;
+					
+public class Program
+{
+	public static void Main()
+	{
+		HashSet<int> set1 = new HashSet<int>(){1,2,3,4,5};
+		HashSet<int> set2 = new HashSet<int>(){4,5,6,7,8};
+		Console.WriteLine(string.Join(", ",Union(set1,set2)));
+	}
+	
+	public static HashSet<int> Union(HashSet<int> set1, HashSet<int> set2) {
+		HashSet<int> result = new HashSet<int>();
+		foreach (int number in set1) {
+			result.Add(number);
+		}
+		foreach (int number in set2) {
+			result.Add(number);
+		}
+		return result;
+	}
+}
