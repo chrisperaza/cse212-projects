@@ -1,0 +1,35 @@
+Consider using a recursive function to sum all of the numbers from 1 to n.
+
+sumAll = 1 + (n - 1)
+
+1 - What is the "smaller version" of this problem that could be used to solve the case of adding some number such as n?
+    The smaller version is: n + (n - 1)
+
+2 - What is the base case?
+    SumAll = 1 + (1 - 1) = 1
+
+3 - Write the code of this function.
+
+using System;
+using System.Linq;
+using System.Collections.Generic;
+					
+public class Program
+{
+	public static void Main()
+	{
+		Console.WriteLine(SumAll(3));
+	}
+	
+	public static int SumAll(int n)
+	{
+    	if (n <= 1)
+    	{
+        	return 1;
+    	}
+    	else
+    	{
+        	return (n + SumAll(n - 1));
+    	}
+	}
+}
