@@ -145,6 +145,21 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        int wildcardSymbolIndex = pattern.IndexOf("*");
+
+        // if wildcard symbol not exist in current pattern
+    	if (wildcardSymbolIndex == -1)
+    	{
+        	results.Add(pattern);
+    	}
+        else
+        {
+    	    string beforeWildCardSymbol = pattern[..wildcardSymbolIndex];
+    	    string afterWildCardSymbol = pattern[(wildcardSymbolIndex + 1)..];
+
+    	    WildcardBinary(beforeWildCardSymbol + "0" + afterWildCardSymbol, results);
+    	    WildcardBinary(beforeWildCardSymbol + "1" + afterWildCardSymbol, results);
+        }
     }
 
     /// <summary>
