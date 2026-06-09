@@ -64,6 +64,44 @@ public class Node
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+
+        int root = 1;
+        int leftH = 0;
+        int rightH = 0;
+        int mostHeight;
+        int total;
+
+        // know the left height
+        if (Left is null)
+        {
+            leftH = 0;
+        }
+        else
+        {
+            leftH = Left.GetHeight();
+        }
+        // know the right height
+        if (Right is null)
+        {
+            rightH = 0;
+        }
+        else
+        {
+            rightH = Right.GetHeight();
+        }
+
+        // know the most height
+        if (leftH > rightH)
+        {
+            mostHeight = leftH;
+        }
+        else
+        {
+            mostHeight = rightH; 
+        }
+
+        total = root + mostHeight;
+
+        return total; // Replace this line with the correct return statement(s)
     }
 }
