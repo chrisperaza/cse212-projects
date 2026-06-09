@@ -13,7 +13,10 @@ public class Node
     {
         // TODO Start Problem 1
 
-        if (value < Data)
+        // create an instance for tree
+        BinarySearchTree tree = new();
+
+        if (value < Data && !tree.Contains(value)) // add condition to know if tree contains the value
         {
             // Insert to the left
             if (Left is null)
@@ -21,7 +24,7 @@ public class Node
             else
                 Left.Insert(value);
         }
-        else
+        else if (value > Data && !tree.Contains(value)) // add condition to know if tree contains the value
         {
             // Insert to the right
             if (Right is null)
